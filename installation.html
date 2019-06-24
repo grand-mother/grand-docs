@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Installation &#8212; GRAND  documentation</title>
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <script src="_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API documentation" href="package/grand.html" />
+    <link rel="prev" title="grand — Package documentation" href="index.html" />
+    <link rel="shortcut icon" type="image/png" href="_static/py.png" />
+    
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    
+     
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="package/grand.html" title="API documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="grand — Package documentation"
+             accesskey="P">previous</a> |</li>
+    <li><img src="_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="index.html">GRAND  documentation</a> &#187;
+    
+
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <a class="reference internal" href="package/grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package is meant to be used on Unix systems. For Windows
+users we recommend using WSL or a virtual machine.</p>
+</div>
+<p>Python 3.8 or later is required for installing and running the <a class="reference internal" href="package/grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a>
+package. OS specific instructions are found below.</p>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<p>Once you have Python 3.8 installed your can get the <a class="reference internal" href="package/grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package from
+<a class="reference external" href="https://pypi.org/project/grand">PyPI</a>, e.g. using pip as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install grand
+</pre></div>
+</div>
+<p>If you don’t already have Python3.8, on Linux we provide a ready to use
+<a class="reference external" href="https://appimage.org">AppImage</a>. It contains Python3.8 and extra Python packages needed by
+<a class="reference internal" href="package/grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a>.  Note that you need not use this <a class="reference external" href="https://appimage.org">AppImage</a>. The <a class="reference internal" href="package/grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a>
+package is compatible with any distribution of CPython 3.8, e.g. installing from
+source or using conda if you prefer.</p>
+<p>If you like to go for the <a class="reference external" href="https://appimage.org">AppImage</a> you can download it from <a class="reference external" href="https://github.com/grand-mother/grand">GitHub</a> as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://github.com/grand-mother/grand/releases/download/appimage/python3-x86_64.AppImage
+chmod +x python3-x86_64.AppImage
+</pre></div>
+</div>
+<p>Further instructions on <a class="reference external" href="https://github.com/niess/python-appimage">Python AppImages</a> can be found on GitHub. In
+particular we recommend extracting the AppImage in order to get a contained and
+expendable Python runtime. This can be done as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python3-x86_64.AppImage --appimage-extract
+mv squashfs-root python3
+rm -f python3-x86_64.AppImage
+</pre></div>
+</div>
+<p>Then, you can export the <a class="reference external" href="https://appimage.org">AppImage</a> python to you environment as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>path<span class="k">)</span><span class="s2">/python3/usr/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="osx">
+<h2>OSX<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h2>
+<p>On OSX you will need to build the <a class="reference internal" href="package/grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package from the source. This
+can be done as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/grand-mother/grand.git
+<span class="nb">cd</span> grand
+pip3.8 install --user -U pip
+pip3.8 install --user -U -r requirements.txt
+make install <span class="nv">PYTHON</span><span class="o">=</span><span class="k">$(</span>which python3.8<span class="k">)</span>
+</pre></div>
+</div>
+<p>Once built, the <a class="reference internal" href="package/grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package can be relocated to any desired location.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#osx">OSX</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code> — Package documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="package/grand.html"
+                        title="next chapter">API documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="package/grand.html" title="API documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="grand — Package documentation"
+             >previous</a> |</li>
+    <li><img src="_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="index.html">GRAND  documentation</a> &#187;
+    
+
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="copyright.html">Copyright</a> 2019, The GRAND collaboration.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on None.
+    
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+
+  </body>
+</html>

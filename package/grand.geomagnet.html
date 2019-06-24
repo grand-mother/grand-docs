@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>geomagnet — Geomagnetic helpers &#8212; GRAND  documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="io — Utilities for reading or writing data" href="grand.io.html" />
+    <link rel="prev" title="API documentation" href="grand.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+     
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.io.html" title="io — Utilities for reading or writing data"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="grand.html" title="API documentation"
+             accesskey="P">previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" accesskey="U">API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-grand.geomagnet">
+<span id="geomagnet-geomagnetic-helpers"></span><h1><a class="reference internal" href="#module-grand.geomagnet" title="grand.geomagnet"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code></a> — Geomagnetic helpers<a class="headerlink" href="#module-grand.geomagnet" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-grand.geomagnet" title="grand.geomagnet"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code></a> module provides a simple interface to world wide
+models of the Earth magnetic field. It implements simple getter functions,
+<a class="reference internal" href="#grand.geomagnet.field" title="grand.geomagnet.field"><code class="xref py py-func docutils literal notranslate"><span class="pre">field()</span></code></a> and <a class="reference internal" href="#grand.geomagnet.model" title="grand.geomagnet.model"><code class="xref py py-func docutils literal notranslate"><span class="pre">model()</span></code></a>, in
+order to access the default geomagnetic model. For test purpose alternative
+models can also be instanciated as <a class="reference internal" href="#grand.geomagnet.Geomagnet" title="grand.geomagnet.Geomagnet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Geomagnet</span></code></a> object.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The input <em>coordinates</em> to the <a class="reference internal" href="#grand.geomagnet.field" title="grand.geomagnet.field"><code class="xref py py-func docutils literal notranslate"><span class="pre">field()</span></code></a> function or
+method must be a <a class="reference internal" href="grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> frame, i.e. <a class="reference internal" href="grand.coordinates.html#grand.ECEF" title="grand.ECEF"><code class="xref py py-class docutils literal notranslate"><span class="pre">ECEF</span></code></a> or
+<a class="reference internal" href="grand.coordinates.html#grand.LTP" title="grand.LTP"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTP</span></code></a>. In addition, if no observation time is specified
+a default value is used (31 December 2019).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="#grand.geomagnet.field" title="grand.geomagnet.field"><code class="xref py py-func docutils literal notranslate"><span class="pre">field()</span></code></a> function and method accept vectorized
+input. The frame of the returned value depends on the input size. If a
+single point is provided the magnetic field is returned in local
+<a class="reference internal" href="grand.coordinates.html#grand.LTP" title="grand.LTP"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTP</span></code></a> coordinates, centered on the input <em>coordinates</em>.
+Otherwise the components are given in <a class="reference internal" href="grand.coordinates.html#grand.ECEF" title="grand.ECEF"><code class="xref py py-class docutils literal notranslate"><span class="pre">ECEF</span></code></a>.</p>
+</div>
+<div class="section" id="default-interface">
+<h2>Default interface<a class="headerlink" href="#default-interface" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="grand.geomagnet.field">
+<code class="sig-prename descclassname">grand.geomagnet.</code><code class="sig-name descname">field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinates</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span><a class="headerlink" href="#grand.geomagnet.field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default geo-magnetic field at the given <em>coordinates</em>.</p>
+<p>For example, the following returns the Earth magnetic field at sea level,
+close to Clermont-Ferrand, France, for new year 2019.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">ECEF</span><span class="p">(</span><span class="n">representation_type</span><span class="o">=</span><span class="s1">&#39;geodetic&#39;</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mi">45</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">longitude</span><span class="o">=</span><span class="mi">3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">obstime</span><span class="o">=</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">geomagnet</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.geomagnet.model">
+<em class="property">property </em><code class="sig-prename descclassname">geomagnet.</code><code class="sig-name descname">model</code><a class="headerlink" href="#grand.geomagnet.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>str(object=’’) -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to ‘strict’.</p>
+<p>The default geomagnetic model, i.e. <a class="reference external" href="https://www.ngdc.noaa.gov/IAGA/vmod/igrf.html">IGRF12</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.geomagnet.obstime">
+<em class="property">property </em><code class="sig-prename descclassname">geomagnet.</code><code class="sig-name descname">obstime</code><a class="headerlink" href="#grand.geomagnet.obstime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return date object with same year, month and day.</p>
+<p>The deault observation time, i.e. 31 December 2019.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="alternative-magnetic-models">
+<h2>Alternative magnetic models<a class="headerlink" href="#alternative-magnetic-models" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In order to get the geomagnetic field from the default GRAND model (IGRF12),
+one should not directly instantiate a <a class="reference internal" href="#grand.geomagnet.Geomagnet" title="grand.geomagnet.Geomagnet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Geomagnet</span></code></a>
+object.  Instead one should use the <a class="reference internal" href="#grand.geomagnet.field" title="grand.geomagnet.field"><code class="xref py py-func docutils literal notranslate"><span class="pre">field()</span></code></a> function
+of the <a class="reference internal" href="#module-grand.geomagnet" title="grand.geomagnet"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code></a> module.  This class is only meant to be used
+for studies of the impact of alternative models.</p>
+</div>
+<p>Supported models for the Earth magnetic field are: <a class="reference external" href="https://www.ngdc.noaa.gov/IAGA/vmod/igrf.html">IGRF12</a> and <a class="reference external" href="http://www.geomag.bgs.ac.uk/research/modelling/WorldMagneticModel.html">WMM2015</a>.</p>
+<dl class="py class">
+<dt id="grand.geomagnet.Geomagnet">
+<em class="property">class </em><code class="sig-prename descclassname">grand.geomagnet.</code><code class="sig-name descname">Geomagnet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.geomagnet.Geomagnet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Proxy to a geomagnetic model</p>
+<p>The default model is <a class="reference external" href="https://www.ngdc.noaa.gov/IAGA/vmod/igrf.html">IGRF12</a>. You can instanciate an alternative model by
+specifying its name, E.g.  as follow:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">magnet</span> <span class="o">=</span> <span class="n">geomagnet</span><span class="o">.</span><span class="n">Geomagnet</span><span class="p">(</span><span class="s1">&#39;WWM2015&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="grand.geomagnet.Geomagnet.field">
+<code class="sig-name descname">field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinates</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span><a class="headerlink" href="#grand.geomagnet.Geomagnet.field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the geo-magnetic field components</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code> — Geomagnetic helpers</a><ul>
+<li><a class="reference internal" href="#default-interface">Default interface</a></li>
+<li><a class="reference internal" href="#alternative-magnetic-models">Alternative magnetic models</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="grand.html"
+                        title="previous chapter">API documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="grand.io.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> — Utilities for reading or writing data</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/package/grand.geomagnet.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.io.html" title="io — Utilities for reading or writing data"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="grand.html" title="API documentation"
+             >previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" >API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2019, The GRAND collaboration.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on None.
+    
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+
+  </body>
+</html>

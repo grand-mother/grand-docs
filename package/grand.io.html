@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>io — Utilities for reading or writing data &#8212; GRAND  documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="simulation — Simulation helpers" href="grand.simulation.html" />
+    <link rel="prev" title="geomagnet — Geomagnetic helpers" href="grand.geomagnet.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+     
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.simulation.html" title="simulation — Simulation helpers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="grand.geomagnet.html" title="geomagnet — Geomagnetic helpers"
+             accesskey="P">previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" accesskey="U">API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-grand.io">
+<span id="io-utilities-for-reading-or-writing-data"></span><h1><a class="reference internal" href="#module-grand.io" title="grand.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code></a> — Utilities for reading or writing data<a class="headerlink" href="#module-grand.io" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-grand.io" title="grand.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand.io</span></code></a> module provides utilities for easy reading (writing) Python
+objects from (to) data files. The following types are supported: numpy
+<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>, <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.BaseRepresentation.html#astropy.coordinates.BaseRepresentation" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRepresentation</span></code></a>,
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, astropy
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quantity</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>. In addition any <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>
+or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of numpy <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code> or astropy
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quantity</span></code></a> are stored as a numeric table with annotated
+columns.</p>
+<p>Reading and writing coordinate frames is only supported for the <a class="reference internal" href="grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a>
+specific <a class="reference internal" href="grand.coordinates.html#grand.ECEF" title="grand.ECEF"><code class="xref py py-class docutils literal notranslate"><span class="pre">ECEF</span></code></a> and <a class="reference internal" href="grand.coordinates.html#grand.LTP" title="grand.LTP"><code class="xref py py-class docutils literal notranslate"><span class="pre">grand.LTP</span></code></a> frames. Note that the
+coordinates data, if any, are not stored. If needed they must written explictly
+as a separate entry.</p>
+<p>Inside a file data are structured under <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a>.  The
+<a class="reference internal" href="#grand.io.open" title="grand.io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function allows to access the root node of a file.
+Conceptualy a <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a> can be seen as a folder within a file
+system while the data would be files inside the folder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A C complient memory layout is used for storing the data allowing for an
+efficient read back from C. Numeric values are annotated, e.g. with a unit,
+column name or a metatype. Note also that Python objects are preserved when
+writing and reading back from a data file, e.g. the object type is restored.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The HDF5 format is currently used since it allows a hierarchical organization
+of data, has bindings both for C and Python and automatic compression. Note
+however that several <a class="reference external" href="https://cyrille.rossant.net/moving-away-hdf5">issues</a> have been reported when using HDF5, e.g.
+reliability and performances. Therefore, the underlying data format might
+change in the future, e.g. for a tar archive which actually provides the
+same features.</p>
+</div>
+</div>
+<div class="section" id="accessing-data-files">
+<h2>Accessing data files<a class="headerlink" href="#accessing-data-files" title="Permalink to this headline">¶</a></h2>
+<p>Data files are accessed using the <a class="reference internal" href="#grand.io.open" title="grand.io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> function. The semantic
+is the same than the Python <a class="reference internal" href="#grand.io.open" title="grand.io.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> or C <cite>fopen</cite> functions.</p>
+<dl class="py function">
+<dt id="grand.io.open">
+<code class="sig-prename descclassname">grand.io.</code><code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.io.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open file and return the root <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a> object. If the file
+cannot be opened, an <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#OSError" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised.</p>
+<p>For example, the following creates a new data file using the root
+<a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a> as a closing context manager.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;data.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>In order to read from (append to) a file use the <cite>‘r’</cite> (<cite>‘a’</cite>) mode.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="managing-data-nodes">
+<h2>Managing data nodes<a class="headerlink" href="#managing-data-nodes" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="grand.io.DataNode">
+<em class="property">class </em><code class="sig-prename descclassname">grand.io.</code><code class="sig-name descname">DataNode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span><span class="p">:</span> <span class="n">h5py._hl.group.Group</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.io.DataNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>A node containing data elements and branches to sub-nodes</p>
+<p>Sub-nodes can be accessed by index providing their relative path w.r.t. this
+node. For example the following gets a reference to the sub-node named
+<em>apples</em>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="s1">&#39;apples&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that an <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IndexError" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IndexError</span></code></a> is raised if the sub-node does not exist.
+Use the <a class="reference internal" href="#grand.io.DataNode.branch" title="grand.io.DataNode.branch"><code class="xref py py-func docutils literal notranslate"><span class="pre">branch()</span></code></a> method in order to create a new
+sub-node.</p>
+<p>The <a class="reference internal" href="#grand.io.DataNode.read" title="grand.io.DataNode.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">read()</span></code></a> and <a class="reference internal" href="#grand.io.DataNode.write" title="grand.io.DataNode.write"><code class="xref py py-func docutils literal notranslate"><span class="pre">write()</span></code></a>
+methods allow to read and write data to this node.</p>
+<dl class="py method">
+<dt id="grand.io.DataNode.children">
+<em class="property">property </em><code class="sig-name descname">children</code><a class="headerlink" href="#grand.io.DataNode.children" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator over the sub-nodes inside this node.</p>
+<p>For example, the loop below iterates over all sub-nodes below the root
+one.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.elements">
+<em class="property">property </em><code class="sig-name descname">elements</code><a class="headerlink" href="#grand.io.DataNode.elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator over the data elements inside the node.</p>
+<p>For example, the loop below iterates over all data elements in the root
+node.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The data are loaded from disk at each loop iteration. Use the
+<a class="reference internal" href="#grand.io.DataNode.read" title="grand.io.DataNode.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">read()</span></code></a> method instead if you only want to
+load a specific data element.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.filename">
+<em class="property">property </em><code class="sig-name descname">filename</code><a class="headerlink" href="#grand.io.DataNode.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the data file containing this <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#grand.io.DataNode.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of this <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.parent">
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#grand.io.DataNode.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference to the parent <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a> or <cite>None</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.path">
+<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#grand.io.DataNode.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The full path of this <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataNode</span></code></a> w.r.t. the root node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.branch">
+<code class="sig-name descname">branch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#grand.io.DataNode" title="grand.io.DataNode">grand.io.DataNode</a><a class="headerlink" href="#grand.io.DataNode.branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a reference to a sub-node.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the node does not exists it is created and initialised empty. Use an
+indexed access instead if you want to access only existing sub-nodes.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#grand.io.DataNode.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the data file containing the current node.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Closing the data file disables all related nodes, parents and children,
+which might lead to unexpected results. Therefore it is stronly
+recommended to wrap all I/Os within a root node context (i.e. using a
+<cite>with</cite> statement as shown below) instead of explictly calling the
+<a class="reference internal" href="#grand.io.DataNode.close" title="grand.io.DataNode.close"><code class="xref py py-func docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.hdf5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="c1"># Do all I/Os within this context</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>The data file is automatically closed when exiting the root node’s
+context. Note that only the root node is a closing context. Contexts
+spawned from a sub-node do not close the data file.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></span></em>, <em class="sig-param"><span class="n">dtype</span><span class="p">:</span> <span class="n">Union[numpy.DataType, str, None]</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.io.DataNode.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read data from this node.</p>
+<p>The optional argument <em>dtype</em> allows to specify the data type to use
+for the read values. By default the native data type in the file is used.</p>
+<p>Multiple data can be read at once by providing multiple arguments. For
+example the following reads out two data elements from the root node.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frequency</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;position&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.io.DataNode.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">unit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">columns</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.io.DataNode.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write data to this node.</p>
+<p>The data type (<em>dtype</em>) can be explictly specified a <a class="reference external" href="https://numpy.org/devdocs/user/basics.types.html">numpy data type</a>.
+For example the following writes an astropy
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quantity</span></code></a> as a 32 bits floating point.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that if <em>dtype</em> is omitted the native Python precision is used when
+writing the data to file.</p>
+<p>The <em>unit</em> keyword allows to specify the unit to use when writing an
+astropy <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quantity</span></code></a>. If omitted the native unit is
+used.</p>
+<p>The <em>units</em> and <em>columns</em> keywords allow to specify the units an names of
+columns when writing a table, i.e. a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of
+numpy <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code> or astropy <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quantity</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="serialising-python-data">
+<h3>Serialising Python data<a class="headerlink" href="#serialising-python-data" title="Permalink to this headline">¶</a></h3>
+<p>The following example shows how to write basic Python objects to a data file.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;data.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">root</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;example_of_cstring&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;This is a C like string</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">root</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;example_of_str&#39;</span><span class="p">,</span> <span class="s1">&#39;This is a Python string&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">root</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;example_of_number&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">root</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;example_of_array&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Python <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> objects differ from C ones. In order to generate a C
+like string a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> object must be used with an explicit null
+termination.</p>
+</div>
+<p>Conversely, reading the data back can be done as following.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;data.hdf5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">cstring</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;example_of_cstring&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">python_string</span> <span class="o">=</span> <span class="n">cstring</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-physical-data">
+<h3>Working with physical data<a class="headerlink" href="#working-with-physical-data" title="Permalink to this headline">¶</a></h3>
+<p>The following example illustrates how to create a new data file and populate it
+with some physical data organised under various branches.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;data.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">root</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="mf">1E+18</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">eV</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">with</span> <span class="n">root</span><span class="o">.</span><span class="n">branch</span><span class="p">(</span><span class="s1">&#39;fields/a0&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">a0</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">r</span> <span class="o">=</span> <span class="n">CartesianRepresentation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">a0</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">)</span> <span class="c1"># Store the data with a specific format</span>
+<span class="gp">...</span>
+<span class="gp">... </span>        <span class="n">E</span> <span class="o">=</span> <span class="n">CartesianRepresentation</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+<span class="gp">... </span>            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+<span class="gp">... </span>            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+<span class="gp">... </span>            <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;uV/m&#39;</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>        <span class="n">a0</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;V/m&#39;</span><span class="p">)</span> <span class="c1"># Store the data with a specific unit</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> — Utilities for reading or writing data</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#accessing-data-files">Accessing data files</a></li>
+<li><a class="reference internal" href="#managing-data-nodes">Managing data nodes</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#serialising-python-data">Serialising Python data</a></li>
+<li><a class="reference internal" href="#working-with-physical-data">Working with physical data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="grand.geomagnet.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code> — Geomagnetic helpers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="grand.simulation.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simulation</span></code> — Simulation helpers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/package/grand.io.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.simulation.html" title="simulation — Simulation helpers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="grand.geomagnet.html" title="geomagnet — Geomagnetic helpers"
+             >previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" >API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2019, The GRAND collaboration.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on None.
+    
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+
+  </body>
+</html>

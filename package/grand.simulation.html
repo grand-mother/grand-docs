@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>simulation — Simulation helpers &#8212; GRAND  documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="store — Interface to remote data storage" href="grand.store.html" />
+    <link rel="prev" title="io — Utilities for reading or writing data" href="grand.io.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+     
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.store.html" title="store — Interface to remote data storage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="grand.io.html" title="io — Utilities for reading or writing data"
+             accesskey="P">previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" accesskey="U">API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-grand.simulation">
+<span id="simulation-simulation-helpers"></span><h1><a class="reference internal" href="#module-grand.simulation" title="grand.simulation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simulation</span></code></a> — Simulation helpers<a class="headerlink" href="#module-grand.simulation" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-grand.simulation" title="grand.simulation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simulation</span></code></a> module provides utilities for the GRAND simulation.
+Currently it only contains a single <a class="reference internal" href="#grand.simulation.ShowerEvent" title="grand.simulation.ShowerEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShowerEvent</span></code></a> class
+that allows reading &amp; writing Monte Carlo radio shower events, e.g. generated
+with CoREAS or ZHAireS.</p>
+<div class="section" id="radio-shower-events">
+<h2>Radio shower events<a class="headerlink" href="#radio-shower-events" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generic-shower">
+<h3>Generic shower<a class="headerlink" href="#generic-shower" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="#grand.simulation.ShowerEvent" title="grand.simulation.ShowerEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShowerEvent</span></code></a> class allows</p>
+<dl class="py class">
+<dt id="grand.simulation.ShowerEvent">
+<em class="property">class </em><code class="sig-prename descclassname">grand.simulation.</code><code class="sig-name descname">ShowerEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy</span><span class="p">:</span> <span class="n">‘Optional[u.Quantity]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zenith</span><span class="p">:</span> <span class="n">‘Optional[u.Quantity]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">azimuth</span><span class="p">:</span> <span class="n">‘Optional[u.Quantity]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">primary</span><span class="p">:</span> <span class="n">‘Optional[ParticleCode]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">frame</span><span class="p">:</span> <span class="n">‘Optional[BaseCoordinateFrame]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">core</span><span class="p">:</span> <span class="n">‘Optional[CartesianRepresentation]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">geomagnet</span><span class="p">:</span> <span class="n">‘Optional[CartesianRepresentation]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum</span><span class="p">:</span> <span class="n">‘Optional[CartesianRepresentation]’</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fields</span><span class="p">:</span> <span class="n">‘Optional[FieldsCollection]’</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.simulation.ShowerEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="coreas-shower">
+<h3>CoREAS shower<a class="headerlink" href="#coreas-shower" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="grand.simulation.CoreasShower">
+<em class="property">class </em><code class="sig-prename descclassname">grand.simulation.</code><code class="sig-name descname">CoreasShower</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.quantity.Quantity.html#astropy.units.quantity.Quantity" title="(in Astropy v4.3)">astropy.units.quantity.Quantity</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zenith</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.quantity.Quantity.html#astropy.units.quantity.Quantity" title="(in Astropy v4.3)">astropy.units.quantity.Quantity</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">azimuth</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.quantity.Quantity.html#astropy.units.quantity.Quantity" title="(in Astropy v4.3)">astropy.units.quantity.Quantity</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">primary</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>grand.simulation.pdg.ParticleCode<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">frame</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>astropy.coordinates.baseframe.BaseCoordinateFrame<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">core</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>astropy.coordinates.representation.CartesianRepresentation<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">geomagnet</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>astropy.coordinates.representation.CartesianRepresentation<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>astropy.coordinates.representation.CartesianRepresentation<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fields</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>grand.simulation.shower.generic.FieldsCollection<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.simulation.CoreasShower" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simulation</span></code> — Simulation helpers</a><ul>
+<li><a class="reference internal" href="#radio-shower-events">Radio shower events</a><ul>
+<li><a class="reference internal" href="#generic-shower">Generic shower</a></li>
+<li><a class="reference internal" href="#coreas-shower">CoREAS shower</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="grand.io.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> — Utilities for reading or writing data</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="grand.store.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">store</span></code> — Interface to remote data storage</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/package/grand.simulation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.store.html" title="store — Interface to remote data storage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="grand.io.html" title="io — Utilities for reading or writing data"
+             >previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" >API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2019, The GRAND collaboration.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on None.
+    
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>API documentation &#8212; GRAND  documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="geomagnet — Geomagnetic helpers" href="grand.geomagnet.html" />
+    <link rel="prev" title="Installation" href="../installation.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+     
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.geomagnet.html" title="geomagnet — Geomagnetic helpers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-grand">
+<span id="api-documentation"></span><h1>API documentation<a class="headerlink" href="#module-grand" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If not stated explicitly, all examples assume that the <a class="reference internal" href="#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package
+and <a class="reference external" href="https://docs.astropy.org/en/stable/units/index.html#module-astropy.units" title="(in Astropy v4.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.units</span></code></a> have been imported as below.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">grand</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+</pre></div>
+</div>
+<div class="section" id="interfaces">
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package exposes the following interface modules. Most of those
+are wrappers, E.g. for core <cite>C</cite> libraries used in the simulation.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="grand.geomagnet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code> — Geomagnetic helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grand.io.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> — Utilities for reading or writing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grand.simulation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simulation</span></code> — Simulation helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grand.store.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">store</span></code> — Interface to remote data storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grand.topography.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">topography</span></code> — Topography helpers</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="extensions">
+<h2>Extensions<a class="headerlink" href="#extensions" title="Permalink to this headline">¶</a></h2>
+<p>In addition, the <a class="reference internal" href="#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package extends the <code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy</span></code> package as
+described below.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="grand.coordinates.html">Extension of <code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API documentation</a><ul>
+<li><a class="reference internal" href="#interfaces">Interfaces</a></li>
+<li><a class="reference internal" href="#extensions">Extensions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="grand.geomagnet.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code> — Geomagnetic helpers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/package/grand.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.geomagnet.html" title="geomagnet — Geomagnetic helpers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../installation.html" title="Installation"
+             >previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2019, The GRAND collaboration.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on None.
+    
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>topography — Topography helpers &#8212; GRAND  documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Extension of astropy.coordinates" href="grand.coordinates.html" />
+    <link rel="prev" title="store — Interface to remote data storage" href="grand.store.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+     
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.coordinates.html" title="Extension of astropy.coordinates"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="grand.store.html" title="store — Interface to remote data storage"
+             accesskey="P">previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" accesskey="U">API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-grand.topography">
+<span id="topography-topography-helpers"></span><h1><a class="reference internal" href="#module-grand.topography" title="grand.topography"><code class="xref py py-mod docutils literal notranslate"><span class="pre">topography</span></code></a> — Topography helpers<a class="headerlink" href="#module-grand.topography" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-grand.topography" title="grand.topography"><code class="xref py py-mod docutils literal notranslate"><span class="pre">topography</span></code></a> module provides a simple interface to world wide
+elevation models. It implements simple getter functions,
+<a class="reference internal" href="#grand.topography.elevation" title="grand.topography.elevation"><code class="xref py py-func docutils literal notranslate"><span class="pre">elevation()</span></code></a> and
+<a class="reference internal" href="#grand.topography.geoid_undulation" title="grand.topography.geoid_undulation"><code class="xref py py-func docutils literal notranslate"><span class="pre">geoid_undulation()</span></code></a>, in order to access the default
+topography model. For test purpose alternative models can also be instanciated
+as <a class="reference internal" href="#grand.topography.Topography" title="grand.topography.Topography"><code class="xref py py-class docutils literal notranslate"><span class="pre">Topography</span></code></a> object.</p>
+<p>The topography elevation data are stored in a local cache within the <code class="docutils literal notranslate"><span class="pre">grand</span></code>
+user space.  The <a class="reference internal" href="#grand.topography.update_data" title="grand.topography.update_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">update_data()</span></code></a> allows to manage this
+cache.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Topography elevation data are not automatically downloaded. They must be
+requested explicitly with the <a class="reference internal" href="#grand.topography.update_data" title="grand.topography.update_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">update_data()</span></code></a> function
+before calling <a class="reference internal" href="#grand.topography.elevation" title="grand.topography.elevation"><code class="xref py py-func docutils literal notranslate"><span class="pre">elevation()</span></code></a>.</p>
+</div>
+<div class="section" id="default-interface">
+<h2>Default interface<a class="headerlink" href="#default-interface" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The input <em>coordinates</em> to the <a class="reference internal" href="#grand.topography.elevation" title="grand.topography.elevation"><code class="xref py py-func docutils literal notranslate"><span class="pre">elevation()</span></code></a> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">geoid_undulations()</span></code> functions must be a <a class="reference internal" href="grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a>
+frame, i.e. <a class="reference internal" href="grand.coordinates.html#grand.ECEF" title="grand.ECEF"><code class="xref py py-class docutils literal notranslate"><span class="pre">ECEF</span></code></a> or <a class="reference internal" href="grand.coordinates.html#grand.LTP" title="grand.LTP"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTP</span></code></a>. If magnetic
+coordinates are used, the observation time must be specified as well.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="#grand.topography.elevation" title="grand.topography.elevation"><code class="xref py py-func docutils literal notranslate"><span class="pre">elevation()</span></code></a> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">geoid_undulations()</span></code> functions accept vectorized data.
+The returned value is a <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Quantity</span></code></a> in meters.</p>
+</div>
+<dl class="py function">
+<dt id="grand.topography.distance">
+<code class="sig-prename descclassname">grand.topography.</code><code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">direction</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">maximum_distance</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Quantity<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Quantity<a class="headerlink" href="#grand.topography.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the signed intersection distance with the topography.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The returned distance is signed. A positive (negative) value indicates
+that the initial position is above (below) the ground. The absolute value
+gives the actual distance.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="grand.topography.elevation">
+<code class="sig-prename descclassname">grand.topography.</code><code class="sig-name descname">elevation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinates</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reference</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>grand.tools.topography.Reference<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Quantity<a class="headerlink" href="#grand.topography.elevation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the topography elevation, w.r.t. sea level or w.r.t. the ellipsoid.</p>
+<p>For example, the following provides the topography elevation, w.r.t. the sea
+level, close to Urumuqi, China, provided that the corresponding
+data have been cached.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">ECEF</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">43.83</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mf">87.62</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">representation_type</span><span class="o">=</span><span class="s1">&#39;geodetic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elevation</span> <span class="o">=</span> <span class="n">topography</span><span class="o">.</span><span class="n">elevation</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">reference</span><span class="o">=</span><span class="n">topography</span><span class="o">.</span><span class="n">Reference</span><span class="o">.</span><span class="n">GEOID</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, if no explicit reference is specified, the elevation is given
+w.r.t. the ellipsoid if geocentric coordinates are used (ECEF) or in local
+coordinates if local coordinates (LTP) are provided. In the latter case,
+the elevation data naturally include the Earth curvature.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="grand.topography.geoid_undulation">
+<code class="sig-prename descclassname">grand.topography.</code><code class="sig-name descname">geoid_undulation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinates</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>ECEF<span class="p">, </span>LTP<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Quantity<a class="headerlink" href="#grand.topography.geoid_undulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the geoid undulation.</p>
+<p>For example, the following corrects the previous elevation from the geoid
+undulation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">elevation</span> <span class="o">+=</span> <span class="n">topography</span><span class="o">.</span><span class="n">geoid_undulation</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="grand.topography.model">
+<code class="sig-prename descclassname">grand.topography.</code><code class="sig-name descname">model</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><a class="headerlink" href="#grand.topography.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default model for topographic data.</p>
+<p>Currently the default topographic model used in GRAND is <a class="reference external" href="https://www.arcgis.com/home/item.html?id=cadb028a356046479fcda5207a235560">SRTMGL1</a>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="cache-management">
+<h2>Cache management<a class="headerlink" href="#cache-management" title="Permalink to this headline">¶</a></h2>
+<p>Topography elevation data are cached in the user space, under
+<a class="reference internal" href="#grand.topography.cachedir" title="grand.topography.cachedir"><code class="xref py py-func docutils literal notranslate"><span class="pre">cachedir()</span></code></a>. The cache can be managed with the
+<a class="reference internal" href="#grand.topography.update_data" title="grand.topography.update_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">update_data()</span></code></a> function.</p>
+<dl class="py function">
+<dt id="grand.topography.update_data">
+<code class="sig-prename descclassname">grand.topography.</code><code class="sig-name descname">update_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinates</span><span class="p">:</span> <span class="n">Union[ECEF, LTP, None]</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">clear</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">radius</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Quantity<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.topography.update_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the cache of topography data.</p>
+<p>If <em>coordinates</em> are provided, the corresponding data tiles are downloaded
+to the cache. The requested area can be enlarged by specifying a <em>radius</em>
+around the <em>coordinates</em>. For example, the following ensures that the
+elevation data within 10 km of <em>coordinates</em> are available in the cache:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">topography</span><span class="o">.</span><span class="n">update_data</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">10</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <em>clear</em> is set to <cite>True</cite> (defaults to <cite>false</cite>) the cache is emptied. This
+occurs before any other operation, i.e. it can be combined with a data
+request.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="grand.topography.cachedir">
+<code class="sig-prename descclassname">grand.topography.</code><code class="sig-name descname">cachedir</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Path<a class="headerlink" href="#grand.topography.cachedir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the location of the topography data cache.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="alternative-topography-models">
+<h2>Alternative topography models<a class="headerlink" href="#alternative-topography-models" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In order to get the topography elevation from the default GRAND model
+(<a class="reference external" href="https://www.arcgis.com/home/item.html?id=cadb028a356046479fcda5207a235560">SRTMGL1</a>), one should not directly instantiate a
+<a class="reference internal" href="#grand.topography.Topography" title="grand.topography.Topography"><code class="xref py py-class docutils literal notranslate"><span class="pre">Topography</span></code></a> object.  Instead one should use the
+<a class="reference internal" href="#grand.topography.elevation" title="grand.topography.elevation"><code class="xref py py-func docutils literal notranslate"><span class="pre">elevation()</span></code></a> function of the <a class="reference internal" href="#module-grand.topography" title="grand.topography"><code class="xref py py-mod docutils literal notranslate"><span class="pre">topography</span></code></a>
+module.  This class is only meant to be used for studies of the impact of
+alternative models.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently only <a class="reference external" href="https://www.arcgis.com/home/item.html?id=cadb028a356046479fcda5207a235560">SRTMGL1</a> tiles are in the <a class="reference internal" href="grand.store.html#module-grand.store" title="grand.store"><code class="xref py py-mod docutils literal notranslate"><span class="pre">store</span></code></a>. Data for
+alternative models must be provided manually.</p>
+</div>
+<dl class="py class">
+<dt id="grand.topography.Topography">
+<em class="property">class </em><code class="sig-prename descclassname">grand.topography.</code><code class="sig-name descname">Topography</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)">pathlib.Path</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.topography.Topography" title="Permalink to this definition">¶</a></dt>
+<dd><p>Proxy to topography data.</p>
+<p>For example, assuming that you have the topography tiles corresponding to
+<a class="reference external" href="https://www.arcgis.com/home/item.html?id=93545c023ec44b109be1b3425edc72e1">ASTER GDEM2</a> in your cache, the following allows to access those.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">topo</span> <span class="o">=</span> <span class="n">topography</span><span class="o">.</span><span class="n">Topography</span><span class="p">(</span><span class="s1">&#39;ASTER-GDEM2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">topography</span></code> — Topography helpers</a><ul>
+<li><a class="reference internal" href="#default-interface">Default interface</a></li>
+<li><a class="reference internal" href="#cache-management">Cache management</a></li>
+<li><a class="reference internal" href="#alternative-topography-models">Alternative topography models</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="grand.store.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">store</span></code> — Interface to remote data storage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="grand.coordinates.html"
+                        title="next chapter">Extension of <code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/package/grand.topography.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.coordinates.html" title="Extension of astropy.coordinates"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="grand.store.html" title="store — Interface to remote data storage"
+             >previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" >API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2019, The GRAND collaboration.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on None.
+    
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+
+  </body>
+</html>

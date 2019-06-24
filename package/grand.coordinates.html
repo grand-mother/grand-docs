@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Extension of astropy.coordinates &#8212; GRAND  documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="topography — Topography helpers" href="grand.topography.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+     
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.topography.html" title="topography — Topography helpers"
+             accesskey="P">previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" accesskey="U">API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-grand.tool.coordinates">
+<span id="extension-of-astropy-coordinates"></span><h1>Extension of <a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v4.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a><a class="headerlink" href="#module-grand.tool.coordinates" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package extends <a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v4.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a> with geographic
+representations and local frames. It adds the <a class="reference internal" href="#grand.ECEF" title="grand.ECEF"><code class="xref py py-class docutils literal notranslate"><span class="pre">ECEF</span></code></a> and
+<a class="reference internal" href="#grand.LTP" title="grand.LTP"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTP</span></code></a> frames as well as the
+<a class="reference internal" href="#grand.GeodeticRepresentation" title="grand.GeodeticRepresentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeodeticRepresentation</span></code></a> and
+<a class="reference internal" href="#grand.HorizontalRepresentation" title="grand.HorizontalRepresentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">HorizontalRepresentation</span></code></a> of coordinates.</p>
+</div>
+<div class="section" id="frames">
+<h2>Frames<a class="headerlink" href="#frames" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> frames differ from base <a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v4.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a> frames in
+several respects. First, they all inherit from a
+<a class="reference internal" href="#grand.ExtendedCoordinateFrame" title="grand.ExtendedCoordinateFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtendedCoordinateFrame</span></code></a> instead of a
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">BaseCoordinateFrame</span></code>. Their coordinates data are
+<em>read only</em>. This prevents some severe bugs (e.g. see issue <a class="reference external" href="https://github.com/astropy/astropy/issues/9873">#9873</a>). In
+addition, they support basic arithmetic operators (<cite>+</cite>, <cite>-</cite> and <cite>*</cite>).</p>
+<p>Secondly, the <a class="reference internal" href="grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> frames are co-moving with the Earth. i.e. the
+<em>obstime</em> can be omitted, in which case it is inherited from the source frame
+during transforms. This differs from base <a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v4.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a> frames
+where the observation time must be stated explicitly during a transform (E.g.
+see issue <a class="reference external" href="https://github.com/astropy/astropy/issues/8390">#8390</a>).</p>
+<p>If specified, the observation time must be an instance of an <cite>astropy</cite>
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.time.Time.html#astropy.time.Time" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Time</span></code></a> object or any of its initializers, E.g.
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>, or <cite>str</cite>.</p>
+<p>In addition, the frame classes defined in <a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v4.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a> do not
+distinguish points from vectors when transforming between frames. The <cite>grand</cite>
+frames do. An automatic type inference occurs based on the data
+<a class="reference external" href="https://docs.astropy.org/en/stable/units/index.html#module-astropy.units" title="(in Astropy v4.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.units</span></code></a>, as following.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the frame data are homogeneous to a length, there are assumed to
+transform as a point. Otherwise, they transform as a vector quantity.</p>
+</div>
+<div class="section" id="ecef-frame">
+<h3>ECEF frame<a class="headerlink" href="#ecef-frame" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="#grand.ECEF" title="grand.ECEF"><code class="xref py py-class docutils literal notranslate"><span class="pre">ECEF</span></code></a> class (<a class="reference external" href="https://en.wikipedia.org/wiki/ECEF">Earth-Centered Earth-Fixed</a>) is a wrapper for
+geocentric frames. It behaves as the <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.ITRS.html#astropy.coordinates.ITRS" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ITRS</span></code></a> frame
+but co-moving with the Earth, i.e. the <em>obstime</em> can be omitted.</p>
+<dl class="py class">
+<dt id="grand.ECEF">
+<em class="property">class </em><code class="sig-prename descclassname">grand.</code><code class="sig-name descname">ECEF</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">obstime</span><span class="p">:</span> <span class="n">Union[datetime.datetime, astropy.time.core.Time, str, None]</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.ECEF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Earth-Centered Earth-Fixed frame, co-moving with the Earth.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, a <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.CartesianRepresentation.html#astropy.coordinates.CartesianRepresentation" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CartesianRepresentation</span></code></a> is
+expected for the coordinates data, i.e. <em>x</em>, <em>y</em> and <em>z</em>. For example,
+the following represents a point located at the origin.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">origin</span> <span class="o">=</span> <span class="n">ECEF</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="grand.ECEF.earth_location">
+<em class="property">property </em><code class="sig-name descname">earth_location</code><a class="headerlink" href="#grand.ECEF.earth_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data in this frame as an
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.EarthLocation.html#astropy.coordinates.EarthLocation" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">EarthLocation</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.ECEF.obstime">
+<em class="property">property </em><code class="sig-name descname">obstime</code><a class="headerlink" href="#grand.ECEF.obstime" title="Permalink to this definition">¶</a></dt>
+<dd><p>The observation time. Defaults to <cite>None</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="ltp-frame">
+<h3>LTP frame<a class="headerlink" href="#ltp-frame" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="#grand.LTP" title="grand.LTP"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTP</span></code></a> class (<a class="reference external" href="https://en.wikipedia.org/wiki/Local_tangent_plane_coordinates">Local Tangent Plane coordinates</a>) allows to
+define local frames tangent to the WGS84 ellipsoid. The <em>orientation</em> property
+can be used to define the frame axes, along the directions of the local magnetic
+field. E.g. the following defines a local magnetic North, East, Down (NED) frame
+centered on Greenwich, as:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">EarthLocation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ltp</span> <span class="o">=</span> <span class="n">LTP</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">EarthLocation</span><span class="o">.</span><span class="n">of_site</span><span class="p">(</span><span class="s1">&#39;greenwich&#39;</span><span class="p">),</span>
+<span class="gp">... </span>          <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;NED&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default magnetic North, West, Up (NWU) coordinates are used. If not
+explicitly specified the magnetic <em>declination</em> is computed using the built-in
+<a class="reference internal" href="grand.geomagnet.html#module-grand.geomagnet" title="grand.geomagnet"><code class="xref py py-mod docutils literal notranslate"><span class="pre">geomagnet</span></code></a> module. Alternatively, geographic coordinates can be
+used as well by setting <em>magnetic</em> to <cite>False</cite>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One must always specify the local frame origin, as the <em>location</em> parameter.</p>
+</div>
+<dl class="py class">
+<dt id="grand.LTP">
+<em class="property">class </em><code class="sig-prename descclassname">grand.</code><code class="sig-name descname">LTP</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">location</span><span class="p">:</span> <span class="n">Union[EarthLocation, ECEF, LTP, None]</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">orientation</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Sequence<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">magnetic</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">declination</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.quantity.Quantity.html#astropy.units.quantity.Quantity" title="(in Astropy v4.3)">astropy.units.quantity.Quantity</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rotation</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>grand.tools.coordinates.transform.Rotation<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">obstime</span><span class="p">:</span> <span class="n">Union[datetime, Time, str, None]</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.LTP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local frame tangent to the WGS84 ellipsoid and oriented along cardinal
+directions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, a <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.CartesianRepresentation.html#astropy.coordinates.CartesianRepresentation" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CartesianRepresentation</span></code></a> is
+expected for the coordinates data, i.e. <em>x</em>, <em>y</em> and <em>z</em>.</p>
+</div>
+<dl class="py method">
+<dt id="grand.LTP.rotated">
+<code class="sig-name descname">rotated</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rotation</span><span class="p">:</span> <span class="n">grand.tools.coordinates.transform.Rotation</span></em>, <em class="sig-param"><span class="n">copy</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; LTP<a class="headerlink" href="#grand.LTP.rotated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a rotated version of this frame.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.LTP.earth_location">
+<em class="property">property </em><code class="sig-name descname">earth_location</code><a class="headerlink" href="#grand.LTP.earth_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data in this frame as an
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.EarthLocation.html#astropy.coordinates.EarthLocation" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">EarthLocation</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.LTP.magnetic">
+<em class="property">property </em><code class="sig-name descname">magnetic</code><a class="headerlink" href="#grand.LTP.magnetic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the magnetic north instead of the geographic one (default: True).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.LTP.orientation">
+<em class="property">property </em><code class="sig-name descname">orientation</code><a class="headerlink" href="#grand.LTP.orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The cardinal directions of the x, y, and z axis (default: ENU).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.LTP.obstime">
+<em class="property">property </em><code class="sig-name descname">obstime</code><a class="headerlink" href="#grand.LTP.obstime" title="Permalink to this definition">¶</a></dt>
+<dd><p>The observation time.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="extended-frame">
+<h3>Extended frame<a class="headerlink" href="#extended-frame" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="#grand.ExtendedCoordinateFrame" title="grand.ExtendedCoordinateFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtendedCoordinateFrame</span></code></a> is an extension of the astropy
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.BaseCoordinateFrame.html#astropy.coordinates.BaseCoordinateFrame" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCoordinateFrame</span></code></a> but with <em>read only</em> data.
+This prevents some type of severe bugs that could occur with astropy frames
+when data are modified in-place (E.g. see issue <a class="reference external" href="https://github.com/astropy/astropy/issues/9873">#9873</a>).</p>
+<p>Furthermore the <a class="reference internal" href="#grand.ExtendedCoordinateFrame" title="grand.ExtendedCoordinateFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtendedCoordinateFrame</span></code></a> also implements the
+addition (<cite>+</cite>), subtraction (<cite>-</cite>) and multiplication (<cite>*</cite>) arithmetic operators.
+Those are forwarded to the frame coordinates.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When adding or subtracting two frames the resulting system is the one of the
+left hand side.  If needed, the coordinates of the right hand side are
+transformed to the system of the left hand side before being added or
+subtracted.  Consequently, the addition of two frames is not strictly
+commutative. Note that one can also add or subtract a frame with a
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.BaseRepresentation.html#astropy.coordinates.BaseRepresentation" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRepresentation</span></code></a> in which case the
+representation is assumed to be in the frame system.</p>
+</div>
+<dl class="py class">
+<dt id="grand.ExtendedCoordinateFrame">
+<em class="property">class </em><code class="sig-prename descclassname">grand.</code><code class="sig-name descname">ExtendedCoordinateFrame</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.ExtendedCoordinateFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>A coordinates frame with immutable data supporting extra arithmetic
+operators.</p>
+<p>This class inherits from a <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.BaseCoordinateFrame.html#astropy.coordinates.BaseCoordinateFrame" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCoordinateFrame</span></code></a>.
+Most functionalities are identical and are not documented here.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <cite>data</cite> managed by the frame and by any of its representations are
+enforced to be <em>read only</em> in order to prevent in-place modifications.
+However, contrary to a <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.BaseCoordinateFrame.html#astropy.coordinates.BaseCoordinateFrame" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">astropy.coordinates.BaseCoordinateFrame</span></code></a>
+it is allowed to (re)set the data to another representation, e.g. as:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">CartesianRepresentation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="representations">
+<h2>Representations<a class="headerlink" href="#representations" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="grand.html#module-grand" title="grand"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grand</span></code></a> package explictly adds two geographic representations based on
+the WGS84 ellipsoid. Note that although <cite>astropy</cite> uses the corresponding
+transforms it does not explictly bundle them as coordinates representations.</p>
+<div class="section" id="geodetic-coordinates">
+<h3>Geodetic coordinates<a class="headerlink" href="#geodetic-coordinates" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="#grand.GeodeticRepresentation" title="grand.GeodeticRepresentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeodeticRepresentation</span></code></a> is analog to a
+<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.SphericalRepresentation.html#astropy.coordinates.SphericalRepresentation" title="(in Astropy v4.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SphericalRepresentation</span></code></a> but mapping to the WGS84
+ellipsoid instead of a sphere. It allows to represent <a class="reference internal" href="#grand.ECEF" title="grand.ECEF"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ECEF</span></code></a>
+coordinates using a <a class="reference external" href="https://en.wikipedia.org/wiki/Geodetic_datum">geodetic datum</a> instead of the default
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates.Cartesian</span></code>, E.g. as:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point</span> <span class="o">=</span> <span class="n">ECEF</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mi">45</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mi">3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">representation_type</span><span class="o">=</span><span class="s1">&#39;geodetic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="grand.GeodeticRepresentation">
+<em class="property">class </em><code class="sig-prename descclassname">grand.</code><code class="sig-name descname">GeodeticRepresentation</code><span class="sig-paren">(</span><em class="sig-param">latitude: astropy.coordinates.angles.Latitude</em>, <em class="sig-param">longitude: astropy.coordinates.angles.Longitude</em>, <em class="sig-param">height: astropy.units.quantity.Quantity = &lt;Quantity 0. m&gt;</em>, <em class="sig-param">copy: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#grand.GeodeticRepresentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geodetic coordinates representation w.r.t. the WGS84 ellipsoid.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <em>latitude</em> angle is measured clockwise, w.r.t. the xOy plane. The
+<em>longitude</em> angle is measured counter-clockwise, w.r.t. the x-axis. The
+<em>height</em> is w.r.t. the WGS84 ellipsoid. It defaults to <cite>0</cite> meters if
+ommitted.</p>
+</div>
+<dl class="py method">
+<dt id="grand.GeodeticRepresentation.from_cartesian">
+<em class="property">classmethod </em><code class="sig-name descname">from_cartesian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cart</span><span class="p">:</span> <span class="n">astropy.coordinates.representation.CartesianRepresentation</span></em><span class="sig-paren">)</span> &#x2192; grand.tools.coordinates.representation.GeodeticRepresentation<a class="headerlink" href="#grand.GeodeticRepresentation.from_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Geodetic representation from a Cartesian one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.GeodeticRepresentation.to_cartesian">
+<code class="sig-name descname">to_cartesian</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; astropy.coordinates.representation.CartesianRepresentation<a class="headerlink" href="#grand.GeodeticRepresentation.to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Cartesian representation from a Geodetic one.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="horizontal-coordinates">
+<h3>Horizontal coordinates<a class="headerlink" href="#horizontal-coordinates" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="#grand.HorizontalRepresentation" title="grand.HorizontalRepresentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">HorizontalRepresentation</span></code></a> allows to represent a unit vector,
+e.g. a direction, in a local <a class="reference internal" href="#grand.LTP" title="grand.LTP"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTP</span></code></a> frame using a <a class="reference external" href="https://en.wikipedia.org/wiki/Horizontal_coordinate_system">horizontal
+coordinates system</a>. For example, the following defines a unit vector pointing
+upwards at Greenwich:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">EarthLocation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up</span> <span class="o">=</span> <span class="n">LTP</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">EarthLocation</span><span class="o">.</span><span class="n">of_site</span><span class="p">(</span><span class="s1">&#39;greenwich&#39;</span><span class="p">),</span>
+<span class="gp">... </span>         <span class="n">representation_type</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="n">azimuth</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">elevation</span> <span class="o">=</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="grand.HorizontalRepresentation">
+<em class="property">class </em><code class="sig-prename descclassname">grand.</code><code class="sig-name descname">HorizontalRepresentation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">azimuth</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>astropy.coordinates.angles.Longitude<span class="p">, </span><a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.quantity.Quantity.html#astropy.units.quantity.Quantity" title="(in Astropy v4.3)">astropy.units.quantity.Quantity</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">elevation</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>astropy.coordinates.angles.Latitude<span class="p">, </span><a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.units.quantity.Quantity.html#astropy.units.quantity.Quantity" title="(in Astropy v4.3)">astropy.units.quantity.Quantity</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">copy</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#grand.HorizontalRepresentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Horizontal angular representation, for unit vectors.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <em>azimuth</em> angle is measured clockwise, w.r.t. the y axis. The
+<em>elevation</em> angle is measured clockwise, w.r.t. the xOy plane.</p>
+</div>
+<dl class="py method">
+<dt id="grand.HorizontalRepresentation.from_cartesian">
+<em class="property">classmethod </em><code class="sig-name descname">from_cartesian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cart</span><span class="p">:</span> <span class="n">astropy.coordinates.representation.CartesianRepresentation</span></em><span class="sig-paren">)</span> &#x2192; grand.tools.coordinates.representation.HorizontalRepresentation<a class="headerlink" href="#grand.HorizontalRepresentation.from_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Horizontal angular representation from a Cartesian unit
+vector.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Cartesian unit vector <strong>must</strong> be dimensioneless. Though it is not
+checked if the norm of the vector is indeed unity.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="grand.HorizontalRepresentation.to_cartesian">
+<code class="sig-name descname">to_cartesian</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; astropy.coordinates.representation.CartesianRepresentation<a class="headerlink" href="#grand.HorizontalRepresentation.to_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Cartesian unit vector from this Horizontal angular
+representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Extension of <code class="xref py py-mod docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#frames">Frames</a><ul>
+<li><a class="reference internal" href="#ecef-frame">ECEF frame</a></li>
+<li><a class="reference internal" href="#ltp-frame">LTP frame</a></li>
+<li><a class="reference internal" href="#extended-frame">Extended frame</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#representations">Representations</a><ul>
+<li><a class="reference internal" href="#geodetic-coordinates">Geodetic coordinates</a></li>
+<li><a class="reference internal" href="#horizontal-coordinates">Horizontal coordinates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="grand.topography.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">topography</span></code> — Topography helpers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/package/grand.coordinates.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="grand.topography.html" title="topography — Topography helpers"
+             >previous</a> |</li>
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+    <a href="../index.html">GRAND  documentation</a> &#187;
+    
+
+          <li class="nav-item nav-item-1"><a href="grand.html" >API documentation</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2019, The GRAND collaboration.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on None.
+    
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+
+  </body>
+</html>
